@@ -10,32 +10,27 @@ export default function Login() {
 
   async function handleLogin(e: React.FormEvent) {
     e.preventDefault()
-    console.log('Login attempted with:', email)
     setLoading(true)
     setError('')
     try {
       const { data, error } = await supabase.auth.signInWithPassword({ email, password })
-      console.log('Login result:', data, error)
       if (error) {
         setError(error.message)
         setLoading(false)
       } else if (data.session) {
-        console.log('Session found, redirecting...')
         window.location.href = '/dashboard'
       } else {
-        console.log('No session returned')
-        setError('Login failed - no session returned')
+        setError('Login failed - please try again')
         setLoading(false)
       }
     } catch (err) {
-      console.log('Caught error:', err)
+      setError('Something went wrong - please try again')
       setLoading(false)
     }
   }
 
   return (
-    <main 
-expe={{ minHeight: '100vh', background: '#1a2e1a', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '40px' }}>
+    <main style={{ minHeight: '100vh', background: '#1a2e1a', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '40px' }}>
       <div style={{ background: '#fff', borderRadius: '10px', padding: '48px', width: '100%', maxWidth: '420px', boxShadow: '0 20px 60px rgba(0,0,0,0.3)' }}>
         <div style={{ textAlign: 'center', marginBottom: '32px' }}>
           <p style={{ fontSize: '11px', letterSpacing: '3px', color: '#4a7c3f', fontFamily: 'sans-serif', textTransform: 'uppercase', marginBottom: '8px' }}>Members Only</p>
