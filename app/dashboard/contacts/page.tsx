@@ -18,51 +18,33 @@ type Contact = {
   notes: string
 }
 
-export default function Contacts() {
-  const [contacts, setContacts] = useState<Contact[]>([])
-  const [loading, setLoading] = useState(true)
-  const [showForm, setShowForm] = useState(false)
-  const [form, setForm] = useState({ name: '', role: '', organization: '', email: '', phone: '', category: 'supervisor', notes: '' })
+type FormData = {
+  name: string
+  role: string
+  organization: string
+  email: string
+  phone: string
+  category: string
+  notes: string
+}
 
-  useEffect(() => { fetchContacts() }, [])
+const emptyForm: FormData = { name: '', role: '', organization: '', email: '', phone: '', category: 'supervisor', notes: '' }
 
-  async function fetchContacts() {
-    const { data } = await supabase.from('contacts').select('*').order('category')
-    setContacts(data || [])
-    setLoading(false)
-  }
-
-  async function addContact(e: React.FormEvent) {
-    e.preventDefault()
-    const { error } = await supabase.from('contacts').insert([form])
-    if (error) { alert(error.message) } else {
-      setForm({ name: '', role: '', organization: '', email: '', phone: '', category: 'supervisor', notes: '' })
-      setShowForm(false)
-      fetchContacts()
-    }
-  }
-
-  async function deleteContact(id: string) {
-    await supabase.from('contacts').delete().eq('id', id)
-    fetchContacts()
-  }
-
-  const categories = [...new Set(contacts.map(c => c.category))]
-
+function FormModal({ form, setForm, onSave, onCancel, onDelete, isEdit }: {
+  form: FormData
+  setForm: (f: FormData) => void
+  onSave: (e: React.FormEvent) => void
+  onCancel: () => void
+  onDelete?: () => void
+  isEdit: boolean
+}) {
   return (
-    <div style={{ padding: '40px' }}>
-      <div style={{ marginBottom: '32px', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-        <div>
-          <p style={{ fontSize: '11px', letterSpacing: '3px', color: '#4a7c3f', fontFamily: 'sans-serif', textTransform: 'uppercase', marginBottom: '8px' }}>Dashboard</p>
-          <h1 style={{ fontSize: '32px', color: '#1a2e1a', fontFamily: 'Georgia, serif', marginBottom: '4px' }}>Contacts</h1>
-          <p style={{ fontSize: '14px', color: '#8a7a6a', fontFamily: 'sans-serif' }}>{contacts.length} saved</p>
-        </div>
-        <button onClick={() => setShowForm(!showForm)} style={{ background: '#4a7c3f', color: '#f5f0e8', border: 'none', padding: '10px 20px', borderRadius: '4px', fontSize: '14px', fontFamily: 'sans-serif', cursor: 'pointer' }}>+ Add Contact</button>
-      </div>
-
-      {showForm && (
-        <form onSubmit={addContact} style={{ background: '#fff', border: '1px solid #ddd8cc', borderRadius: '8px', padding: '24px', marginBottom: '24px' }}>
-          <p style={{ fontSize: '14px', color: '#1a2e1a', fontFamily: 'Georgia, serif', marginBottom: '16px', fontWeight: 'bold' }}>New Contact</p>
+    <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000 }}>
+      <div style={{ background: '#fff', borderRadius: '8px', padding: '32px', width: '100%', maxWidth: '560px', maxHeight: '90vh', overflowY: 'auto' }}>
+        <h2 style={{ fontSize: '22px', color: '#1a2e1a', fontFamily: 'Georgia, serif', marginBottom: '24px' }}>
+          {isEdit ? 'Edit Contact' : 'New Contact'}
+        </h2>
+        <form onSubmit={onSave}>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', marginBottom: '16px' }}>
             <div>
               <label style={{ display: 'block', fontSize: '12px', color: '#5a5040', fontFamily: 'sans-serif', marginBottom: '6px' }}>Name *</label>
@@ -100,16 +82,96 @@ export default function Contacts() {
               </select>
             </div>
           </div>
-          <div style={{ marginBottom: '16px' }}>
+          <div style={{ marginBottom: '24px' }}>
             <label style={{ display: 'block', fontSize: '12px', color: '#5a5040', fontFamily: 'sans-serif', marginBottom: '6px' }}>Notes</label>
-            <textarea value={form.notes} onChange={e => setForm({...form, notes: e.target.value})} placeholder="Any additional notes..." rows={2} style={{ width: '100%', padding: '10px 12px', border: '1px solid #ddd8cc', borderRadius: '4px', fontSize: '14px', fontFamily: 'sans-serif', resize: 'vertical', boxSizing: 'border-box' }} />
+            <textarea value={form.notes} onChange={e => setForm({...form, notes: e.target.value})} placeholder="Any additional notes..." rows={3} style={{ width: '100%', padding: '10px 12px', border: '1px solid #ddd8cc', borderRadius: '4px', fontSize: '14px', fontFamily: 'sans-serif', resize: 'vertical', boxSizing: 'border-box' }} />
           </div>
           <div style={{ display: 'flex', gap: '12px' }}>
-            <button type="submit" style={{ background: '#4a7c3f', color: '#f5f0e8', border: 'none', padding: '10px 20px', borderRadius: '4px', fontSize: '14px', fontFamily: 'sans-serif', cursor: 'pointer' }}>Save Contact</button>
-            <button type="button" onClick={() => setShowForm(false)} style={{ background: '#fff', color: '#5a5040', border: '1px solid #ddd8cc', padding: '10px 20px', borderRadius: '4px', fontSize: '14px', fontFamily: 'sans-serif', cursor: 'pointer' }}>Cancel</button>
+            <button type="submit" style={{ background: '#4a7c3f', color: '#f5f0e8', border: 'none', padding: '10px 20px', borderRadius: '4px', fontSize: '14px', fontFamily: 'sans-serif', cursor: 'pointer' }}>
+              {isEdit ? 'Save Changes' : 'Add Contact'}
+            </button>
+            <button type="button" onClick={onCancel} style={{ background: '#fff', color: '#5a5040', border: '1px solid #ddd8cc', padding: '10px 20px', borderRadius: '4px', fontSize: '14px', fontFamily: 'sans-serif', cursor: 'pointer' }}>Cancel</button>
+            {isEdit && onDelete && (
+              <button type="button" onClick={onDelete} style={{ background: '#f0e4e4', color: '#7a2a2a', border: 'none', padding: '10px 20px', borderRadius: '4px', fontSize: '14px', fontFamily: 'sans-serif', cursor: 'pointer', marginLeft: 'auto' }}>Delete</button>
+            )}
           </div>
         </form>
+      </div>
+    </div>
+  )
+}
+
+export default function Contacts() {
+  const [contacts, setContacts] = useState<Contact[]>([])
+  const [loading, setLoading] = useState(true)
+  const [showForm, setShowForm] = useState(false)
+  const [editContact, setEditContact] = useState<Contact | null>(null)
+  const [form, setForm] = useState<FormData>(emptyForm)
+
+  useEffect(() => { fetchContacts() }, [])
+
+  async function fetchContacts() {
+    const { data } = await supabase.from('contacts').select('*').order('category')
+    setContacts(data || [])
+    setLoading(false)
+  }
+
+  function openNew() {
+    setEditContact(null)
+    setForm(emptyForm)
+    setShowForm(true)
+  }
+
+  function openEdit(contact: Contact) {
+    setEditContact(contact)
+    setForm({ name: contact.name, role: contact.role || '', organization: contact.organization || '', email: contact.email || '', phone: contact.phone || '', category: contact.category || 'other', notes: contact.notes || '' })
+    setShowForm(true)
+  }
+
+  async function saveContact(e: React.FormEvent) {
+    e.preventDefault()
+    if (editContact) {
+      const { error } = await supabase.from('contacts').update(form).eq('id', editContact.id)
+      if (error) { alert(error.message) }
+    } else {
+      const { error } = await supabase.from('contacts').insert([form])
+      if (error) { alert(error.message) }
+    }
+    setShowForm(false)
+    setEditContact(null)
+    setForm(emptyForm)
+    fetchContacts()
+  }
+
+  async function deleteContact(id: string) {
+    if (!confirm('Delete this contact?')) return
+    await supabase.from('contacts').delete().eq('id', id)
+    setShowForm(false)
+    fetchContacts()
+  }
+
+  const categories = [...new Set(contacts.map(c => c.category))]
+
+  return (
+    <div style={{ padding: '40px' }}>
+      {showForm && (
+        <FormModal
+          form={form}
+          setForm={setForm}
+          onSave={saveContact}
+          onCancel={() => { setShowForm(false); setEditContact(null) }}
+          onDelete={editContact ? () => deleteContact(editContact.id) : undefined}
+          isEdit={!!editContact}
+        />
       )}
+      <div style={{ marginBottom: '32px', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+        <div>
+          <p style={{ fontSize: '11px', letterSpacing: '3px', color: '#4a7c3f', fontFamily: 'sans-serif', textTransform: 'uppercase', marginBottom: '8px' }}>Dashboard</p>
+          <h1 style={{ fontSize: '32px', color: '#1a2e1a', fontFamily: 'Georgia, serif', marginBottom: '4px' }}>Contacts</h1>
+          <p style={{ fontSize: '14px', color: '#8a7a6a', fontFamily: 'sans-serif' }}>{contacts.length} saved</p>
+        </div>
+        <button onClick={openNew} style={{ background: '#4a7c3f', color: '#f5f0e8', border: 'none', padding: '10px 20px', borderRadius: '4px', fontSize: '14px', fontFamily: 'sans-serif', cursor: 'pointer' }}>+ Add Contact</button>
+      </div>
 
       {loading ? <p style={{ fontFamily: 'sans-serif', color: '#8a7a6a' }}>Loading...</p> : contacts.length === 0 ? (
         <div style={{ background: '#fff', border: '1px solid #ddd8cc', borderRadius: '8px', padding: '48px', textAlign: 'center' }}>
@@ -123,17 +185,16 @@ export default function Contacts() {
               <p style={{ fontSize: '12px', color: '#8a7a6a', fontFamily: 'sans-serif', textTransform: 'uppercase', letterSpacing: '2px', marginBottom: '12px' }}>{cat}</p>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '12px' }}>
                 {contacts.filter(c => c.category === cat).map(contact => (
-                  <div key={contact.id} style={{ background: '#fff', border: '1px solid #ddd8cc', borderRadius: '8px', padding: '20px' }}>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-                      <div>
-                        <p style={{ fontSize: '16px', color: '#1a2e1a', fontFamily: 'Georgia, serif', marginBottom: '2px' }}>{contact.name}</p>
-                        {contact.role && <p style={{ fontSize: '12px', color: '#4a7c3f', fontFamily: 'sans-serif', marginBottom: '8px' }}>{contact.role}{contact.organization ? ` · ${contact.organization}` : ''}</p>}
-                        {contact.email && <p style={{ fontSize: '13px', color: '#5a5040', fontFamily: 'sans-serif', marginBottom: '2px' }}><a href={`mailto:${contact.email}`} style={{ color: '#4a7c3f', textDecoration: 'none' }}>{contact.email}</a></p>}
-                        {contact.phone && <p style={{ fontSize: '13px', color: '#5a5040', fontFamily: 'sans-serif' }}>{contact.phone}</p>}
-                        {contact.notes && <p style={{ fontSize: '12px', color: '#8a7a6a', fontFamily: 'sans-serif', marginTop: '8px', fontStyle: 'italic' }}>{contact.notes}</p>}
-                      </div>
-                      <button onClick={() => deleteContact(contact.id)} style={{ background: 'none', border: 'none', color: '#8a7a6a', cursor: 'pointer', fontSize: '18px' }}>×</button>
-                    </div>
+                  <div key={contact.id} onClick={() => openEdit(contact)} style={{ background: '#fff', border: '1px solid #ddd8cc', borderRadius: '8px', padding: '20px', cursor: 'pointer' }}
+                    onMouseEnter={e => (e.currentTarget.style.borderColor = '#4a7c3f')}
+                    onMouseLeave={e => (e.currentTarget.style.borderColor = '#ddd8cc')}
+                  >
+                    <p style={{ fontSize: '16px', color: '#1a2e1a', fontFamily: 'Georgia, serif', marginBottom: '2px' }}>{contact.name}</p>
+                    {contact.role && <p style={{ fontSize: '12px', color: '#4a7c3f', fontFamily: 'sans-serif', marginBottom: '8px' }}>{contact.role}{contact.organization ? ` · ${contact.organization}` : ''}</p>}
+                    {contact.email && <p style={{ fontSize: '13px', color: '#5a5040', fontFamily: 'sans-serif', marginBottom: '2px' }}>{contact.email}</p>}
+                    {contact.phone && <p style={{ fontSize: '13px', color: '#5a5040', fontFamily: 'sans-serif' }}>{contact.phone}</p>}
+                    {contact.notes && <p style={{ fontSize: '12px', color: '#8a7a6a', fontFamily: 'sans-serif', marginTop: '8px', fontStyle: 'italic' }}>{contact.notes}</p>}
+                    <p style={{ fontSize: '11px', color: '#c8b97a', fontFamily: 'sans-serif', marginTop: '12px' }}>Click to edit →</p>
                   </div>
                 ))}
               </div>

@@ -41,11 +41,16 @@ export default function Chat() {
   }
 
   async function sendMessage(e: React.FormEvent) {
-    e.preventDefault()
-    if (!newMessage.trim()) return
-    await supabase.from('messages').insert([{ display_name: displayName, content: newMessage.trim() }])
+  e.preventDefault()
+  if (!newMessage.trim()) return
+  const { error } = await supabase.from('messages').insert([{ display_name: displayName, content: newMessage.trim() }])
+  if (error) {
+    alert(error.message)
+  } else {
     setNewMessage('')
+    fetchMessages()
   }
+}
 
   function saveName(e: React.FormEvent) {
     e.preventDefault()

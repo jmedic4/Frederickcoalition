@@ -14,8 +14,9 @@ export default function Nav() {
       <div style={{ display: 'flex', gap: '24px', alignItems: 'center' }}>
         {[
           { label: 'What Are Data Centers', href: '/what-are-data-centers' },
-          { label: 'The Facts', href: '/#facts' },
+          { label: 'The Facts', href: '/facts' },
           { label: 'Community Event', href: '/community-event' },
+          { label: 'News', href: '/news' },
           { label: 'Events', href: '/events' },
           { label: 'Request a Sign', href: '/request-sign' },
         ].map(link => (

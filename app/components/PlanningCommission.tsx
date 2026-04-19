@@ -1,0 +1,16 @@
+export const planningCommissioners = [
+  { name: 'Tim Stowe', role: 'Chairman', district: 'Red Bud District', url: 'https://www.fcva.us/departments/planning-development/boards-committees/planning-commission/email-planning-commissioner-tim-stowe' },
+  { name: 'Roger L. Thomas', role: 'Vice Chairman', district: 'Shawnee District', url: 'https://www.fcva.us/departments/planning-development/boards-committees/planning-commission/email-planning-commissioner-roger-thomas' },
+  { name: 'Betsy Brumback', role: 'Commissioner', district: 'Back Creek District', url: 'https://www.fcva.us/departments/planning-development/boards-committees/planning-commission/email-planning-commissioner-betsy-brumback' },
+  { name: 'Jeff McKay', role: 'Commissioner', district: 'Back Creek District', url: 'https://www.fcva.us/departments/planning-development/boards-committees/planning-commission/email-planning-commissioner-jeff-mckay' },
+  { name: 'Vaughn Whitacre', role: 'Commissioner', district: 'Gainesboro District', url: 'https://www.fcva.us/departments/planning-development/boards-committees/planning-commission/email-planning-commissioner-vaughn-whitacre' },
+  { name: 'Joseph Crane', role: 'Commissioner', district: 'Gainesboro District', url: 'https://www.fcva.us/departments/planning-development/boards-committees/planning-commission/email-planning-commissioner-joseph-crane' },
+  { name: 'John Lamanna', role: 'Member at Large', district: 'At Large', url: 'https://www.fcva.us/departments/planning-development/boards-committees/planning-commission/email-planning-commissioner-john-lamanna' },
+  { name: 'Thomas Bottorf', role: 'Commissioner', district: 'Opequon District', url: 'https://www.fcva.us/departments/planning-development/boards-committees/planning-commission/email-planning-commissioner-thomas-bottorf' },
+  { name: 'Kevin Sneddon', role: 'Commissioner', district: 'Opequon District', url: 'https://www.fcva.us/departments/planning-development/boards-committees/planning-commission/email-planning-commissioner-kevin-sneddon' },
+  { name: 'Charles Markert', role: 'Commissioner', district: 'Red Bud District', url: 'https://www.fcva.us/departments/planning-development/boards-committees/planning-commission/email-planning-commissioner-charles-markert' },
+  { name: 'Elizabeth Kozel', role: 'Commissioner', district: 'Shawnee District', url: 'https://www.fcva.us/departments/planning-development/boards-committees/planning-commission/email-planning-commissioner-elizabeth-kozel' },
+  { name: 'Justin Kerns', role: 'Commissioner', district: 'Stonewall District', url: 'https://www.fcva.us/departments/planning-development/boards-committees/planning-commission/email-planning-commissioner-justin-kerns' },
+  { name: 'Charles S. DeHaven III', role: 'Commissioner', district: 'Stonewall District', url: 'https://www.fcva.us/departments/planning-development/boards-committees/planning-commission/email-planning-commissioner-charles-dehaven' },
+  { name: 'Wyatt G. Pearson', role: 'Staff Contact', district: '107 North Kent St, Winchester', url: 'https://www.fcva.us/departments/planning-development/boards-committees/planning-commission/email-planning-commissioner-wyatt-pearson' },
+]
