@@ -41,6 +41,30 @@ export default function CommunityEvent() {
             />
           </div>
         </div>
+        <div style={{ maxWidth: '860px', margin: '32px auto 0' }}>
+          <p style={{ color: '#c8b97a', fontFamily: 'Georgia, serif', fontSize: '18px', marginBottom: '16px', textAlign: 'left' }}>Part 3</p>
+          <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden', borderRadius: '8px' }}>
+            <iframe style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 'none' }} src="https://www.youtube.com/embed/KWi-mcqST4E" title="Coalition to Protect Frederick County Community Forum Part 3" allowFullScreen />
+          </div>
+        </div>
+        <div style={{ maxWidth: '860px', margin: '32px auto 0' }}>
+          <p style={{ color: '#c8b97a', fontFamily: 'Georgia, serif', fontSize: '18px', marginBottom: '16px', textAlign: 'left' }}>Part 4</p>
+          <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden', borderRadius: '8px' }}>
+            <iframe style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 'none' }} src="https://www.youtube.com/embed/edU_RtIE1jo" title="Coalition to Protect Frederick County Community Forum Part 4" allowFullScreen />
+          </div>
+        </div>
+        <div style={{ maxWidth: '860px', margin: '32px auto 0' }}>
+          <p style={{ color: '#c8b97a', fontFamily: 'Georgia, serif', fontSize: '18px', marginBottom: '16px', textAlign: 'left' }}>Part 5</p>
+          <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden', borderRadius: '8px' }}>
+            <iframe style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 'none' }} src="https://www.youtube.com/embed/Dv3okxBFg3g" title="Coalition to Protect Frederick County Community Forum Part 5" allowFullScreen />
+          </div>
+        </div>
+        <div style={{ maxWidth: '860px', margin: '32px auto 0' }}>
+          <p style={{ color: '#c8b97a', fontFamily: 'Georgia, serif', fontSize: '18px', marginBottom: '16px', textAlign: 'left' }}>Part 6</p>
+          <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden', borderRadius: '8px' }}>
+            <iframe style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 'none' }} src="https://www.youtube.com/embed/vGJfJ4PWmYo" title="Coalition to Protect Frederick County Community Forum Part 6" allowFullScreen />
+          </div>
+        </div>
       </section>
 
       <section style={{ padding: '64px 40px', background: '#f5f0e8' }}>
