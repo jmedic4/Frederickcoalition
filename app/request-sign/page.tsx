@@ -1,13 +1,11 @@
 'use client'
+import { supabase } from '../../lib/supabase'
 import { useState } from 'react'
-import { createClient } from '@supabase/supabase-js'
+
 import Nav from '../components/Nav'
 import Footer from '../components/Footer'
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-)
+
 
 export default function RequestSign() {
   const [loading, setLoading] = useState(false)
