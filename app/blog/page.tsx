@@ -70,7 +70,7 @@ export default function Blog() {
             <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
               {posts.map((post, index) => (
                 <a key={post.id} href={`/blog/${post.slug}`} style={{ textDecoration: 'none', display: 'block' }}>
-                  <div style={{ background: '#fff', border: '1px solid #ddd8cc', borderRadius: '8px', overflow: 'hidden', display: index === 0 ? 'block' : 'flex' }}
+                  <div key={post.id} style={{ background: '#fff', border: '1px solid #ddd8cc', borderRadius: '8px', overflow: 'hidden', display: index === 0 ? 'block' : 'flex' }}
                     onMouseEnter={e => (e.currentTarget.style.borderColor = '#4a7c3f')}
                     onMouseLeave={e => (e.currentTarget.style.borderColor = '#ddd8cc')}
                   >
