@@ -1,4 +1,5 @@
 import Nav from './components/Nav'
+import Footer from './components/Footer'
 import Image from 'next/image'
 
 export default function Home() {
@@ -12,9 +13,7 @@ export default function Home() {
           <em style={{ color: '#c8b97a' }}>Your Land.</em><br />
           Your Voice.
         </h1>
-        <p style={{ fontSize: '18px', color: '#b8b09a', maxWidth: '560px', margin: '0 auto 40px', fontFamily: 'sans-serif', lineHeight: '1.6' }}>
-          Large-scale data centers are being proposed for Frederick County. Before our farmland and way of life disappear, know the facts.
-        </p>
+        <p style={{ fontSize: '18px', color: '#b8b09a', maxWidth: '560px', margin: '0 auto 40px', fontFamily: 'sans-serif', lineHeight: '1.6' }}>Large-scale data centers are being proposed for Frederick County. Before our farmland and way of life disappear, know the facts.</p>
         <div style={{ display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap' }}>
           <a href="#action" style={{ background: '#4a7c3f', color: '#f5f0e8', padding: '14px 28px', fontSize: '14px', fontFamily: 'sans-serif', borderRadius: '4px', textDecoration: 'none' }}>Take Action Now</a>
           <a href="/facts" style={{ background: 'transparent', color: '#f5f0e8', border: '1px solid #c8b97a', padding: '14px 28px', fontSize: '14px', fontFamily: 'sans-serif', borderRadius: '4px', textDecoration: 'none' }}>Read the Facts</a>
@@ -79,9 +78,7 @@ export default function Home() {
       <section style={{ padding: '80px 40px', background: '#1a2e1a', color: '#f5f0e8', textAlign: 'center' }}>
         <p style={{ fontSize: '11px', letterSpacing: '3px', color: '#c8b97a', fontFamily: 'sans-serif', textTransform: 'uppercase', marginBottom: '12px' }}>What neighbors are living with</p>
         <h2 style={{ fontSize: '40px', color: '#f5f0e8', marginBottom: '16px', fontFamily: 'Georgia, serif' }}>Virginia Counties That Said Yes</h2>
-        <p style={{ fontSize: '16px', color: '#b8b09a', fontFamily: 'sans-serif', lineHeight: '1.7', maxWidth: '640px', margin: '0 auto 48px' }}>
-          Loudoun County is now the world&apos;s largest data center market. Prince William residents are fighting noise and sprawl. Warren County voted no. Frederick County has that same choice — right now.
-        </p>
+        <p style={{ fontSize: '16px', color: '#b8b09a', fontFamily: 'sans-serif', lineHeight: '1.7', maxWidth: '640px', margin: '0 auto 48px' }}>Loudoun County is now the world&apos;s largest data center market. Prince William residents are fighting noise and sprawl. Warren County voted no. Frederick County has that same choice — right now.</p>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '24px', maxWidth: '1100px', margin: '0 auto' }}>
           {[
             { county: 'Loudoun County, Virginia', label: "World's Largest Data Center Market", body: "200+ data centers. 43 million square feet. Drinking water use jumped 250% in four years. High-voltage lines carved through farmland. Supervisors now deny applications — but for most neighborhoods, it's already too late." },
@@ -118,8 +115,7 @@ export default function Home() {
             { name: 'Jay E. Tibbs', district: 'Deputy County Administrator', email: 'jtibbs@fcva.us', phone: '' },
             { name: 'Ann W. Phillips', district: 'Deputy Clerk to the Board', email: 'ann.phillips@fcva.us', phone: '' },
           ].map(sup => (
-            <a key={sup.district}
-              href={`mailto:${sup.email}?subject=Oppose%20Data%20Center%20Zoning%20in%20Frederick%20County%2C%20Virginia&body=Dear%20${encodeURIComponent(sup.name)}%2C%0A%0AI%20am%20a%20resident%20of%20Frederick%20County%2C%20Virginia%2C%20and%20I%20am%20writing%20to%20express%20my%20strong%20opposition%20to%20proposed%20large-scale%20data%20center%20development%20in%20our%20county.%0A%0AI%20am%20deeply%20concerned%20about%20the%20documented%20impacts%20on%20our%20water%20supply%2C%20farmland%2C%20electric%20rates%2C%20air%20quality%2C%20and%20rural%20character.%20Every%20Virginia%20county%20that%20has%20approved%20data%20center%20zoning%20is%20now%20living%20with%20consequences%20that%20cannot%20be%20undone.%0A%0APlease%20vote%20no%20on%20any%20zoning%20changes%20that%20would%20allow%20large-scale%20data%20centers%20in%20Frederick%20County.%20Our%20farmland%2C%20our%20water%2C%20and%20our%20way%20of%20life%20depend%20on%20it.%0A%0ASincerely%2C%0A%5BYour%20Name%5D%0A%5BYour%20Address%5D%0AFrederick%20County%2C%20Virginia`}
+            <a key={sup.district} href={`mailto:${sup.email}?subject=Oppose%20Data%20Center%20Zoning%20in%20Frederick%20County%2C%20Virginia&body=Dear%20${encodeURIComponent(sup.name)}%2C%0A%0AI%20am%20a%20resident%20of%20Frederick%20County%2C%20Virginia%2C%20and%20I%20am%20writing%20to%20express%20my%20strong%20opposition%20to%20proposed%20large-scale%20data%20center%20development%20in%20our%20county.%0A%0AI%20am%20deeply%20concerned%20about%20the%20documented%20impacts%20on%20our%20water%20supply%2C%20farmland%2C%20electric%20rates%2C%20air%20quality%2C%20and%20rural%20character.%0A%0APlease%20vote%20no%20on%20any%20zoning%20changes%20that%20would%20allow%20large-scale%20data%20centers%20in%20Frederick%20County.%0A%0ASincerely%2C%0A%5BYour%20Name%5D%0A%5BYour%20Address%5D%0AFrederick%20County%2C%20Virginia`}
               style={{ display: 'block', background: '#fff', border: '1px solid #ddd8cc', borderRadius: '6px', padding: '20px', textDecoration: 'none', textAlign: 'left' }}>
               <p style={{ fontSize: '11px', letterSpacing: '2px', textTransform: 'uppercase', fontFamily: 'sans-serif', color: '#4a7c3f', marginBottom: '6px' }}>{sup.district}</p>
               <p style={{ fontSize: '16px', color: '#1a2e1a', fontFamily: 'Georgia, serif', marginBottom: '4px' }}>{sup.name}</p>
@@ -162,10 +158,7 @@ export default function Home() {
         </div>
       </section>
 
-      <footer style={{ background: '#1a2e1a', padding: '32px 40px', textAlign: 'center' }}>
-        <p style={{ color: '#c8b97a', fontFamily: 'Georgia, serif', fontSize: '16px', marginBottom: '8px' }}>Coalition to Protect Frederick County</p>
-        <p style={{ color: '#6a8a6a', fontFamily: 'sans-serif', fontSize: '13px' }}>frederickcoalition.org · Frederick County, Virginia</p>
-      </footer>
+      <Footer />
     </main>
   )
 }

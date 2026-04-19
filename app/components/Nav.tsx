@@ -17,6 +17,7 @@ export default function Nav() {
           { label: 'The Facts', href: '/facts' },
           { label: 'Community Event', href: '/community-event' },
           { label: 'News', href: '/news' },
+          { label: 'Blog', href: '/blog' },
           { label: 'Events', href: '/events' },
           { label: 'Request a Sign', href: '/request-sign' },
         ].map(link => (
