@@ -1,34 +1,58 @@
+'use client'
+import { useEffect, useState } from 'react'
+import { createClient } from '@supabase/supabase-js'
 import Nav from '../components/Nav'
 import Footer from '../components/Footer'
-import { createClient } from '@supabase/supabase-js'
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
 )
 
-export default async function Blog() {
-  const { data: posts } = await supabase
-    .from('posts')
-    .select('*')
-    .eq('published', true)
-    .order('published_at', { ascending: false })
+type Post = {
+  id: string
+  title: string
+  slug: string
+  author: string
+  category: string
+  content: string
+  cover_image_url: string
+  published: boolean
+  published_at: string
+}
 
-  const categoryColors: Record<string, { bg: string, color: string }> = {
-    update: { bg: '#e8f0d4', color: '#2a5a1a' },
-    news: { bg: '#d4e8f0', color: '#1a5a7a' },
-    action: { bg: '#f0e4e4', color: '#7a2a2a' },
-    recap: { bg: '#f0e8d4', color: '#7a5a1a' },
-    resource: { bg: '#e8e4f0', color: '#4a3a7a' },
-  }
+const categoryColors: Record<string, { bg: string, color: string }> = {
+  update: { bg: '#e8f0d4', color: '#2a5a1a' },
+  news: { bg: '#d4e8f0', color: '#1a5a7a' },
+  action: { bg: '#f0e4e4', color: '#7a2a2a' },
+  recap: { bg: '#f0e8d4', color: '#7a5a1a' },
+  resource: { bg: '#e8e4f0', color: '#4a3a7a' },
+}
 
-  const categoryLabels: Record<string, string> = {
-    update: 'Coalition Update',
-    news: 'News',
-    action: 'Action Alert',
-    recap: 'Event Recap',
-    resource: 'Resource',
-  }
+const categoryLabels: Record<string, string> = {
+  update: 'Coalition Update',
+  news: 'News',
+  action: 'Action Alert',
+  recap: 'Event Recap',
+  resource: 'Resource',
+}
+
+export default function Blog() {
+  const [posts, setPosts] = useState<Post[]>([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    async function fetchPosts() {
+      const { data } = await supabase
+        .from('posts')
+        .select('*')
+        .eq('published', true)
+        .order('published_at', { ascending: false })
+      setPosts(data || [])
+      setLoading(false)
+    }
+    fetchPosts()
+  }, [])
 
   return (
     <main>
@@ -42,7 +66,9 @@ export default async function Blog() {
       </section>
       <section style={{ padding: '80px 40px', background: '#f5f0e8' }}>
         <div style={{ maxWidth: '900px', margin: '0 auto' }}>
-          {!posts || posts.length === 0 ? (
+          {loading ? (
+            <p style={{ fontFamily: 'sans-serif', color: '#8a7a6a', textAlign: 'center' }}>Loading posts...</p>
+          ) : posts.length === 0 ? (
             <div style={{ background: '#fff', border: '1px solid #ddd8cc', borderRadius: '8px', padding: '48px', textAlign: 'center' }}>
               <p style={{ fontSize: '18px', color: '#1a2e1a', fontFamily: 'Georgia, serif', marginBottom: '8px' }}>No posts yet</p>
               <p style={{ fontSize: '14px', color: '#8a7a6a', fontFamily: 'sans-serif' }}>Check back soon for updates from the coalition.</p>
