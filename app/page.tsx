@@ -16,7 +16,7 @@ export default function Home() {
         </h1>
         <p style={{ fontSize: '18px', color: '#b8b09a', maxWidth: '560px', margin: '0 auto 40px', fontFamily: 'sans-serif', lineHeight: '1.6' }}>Large-scale data centers are being proposed for Frederick County. Before our farmland and way of life disappear, know the facts.</p>
         <div style={{ display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap' }}>
-          <a href="#action" style={{ background: '#4a7c3f', color: '#f5f0e8', padding: '14px 28px', fontSize: '14px', fontFamily: 'sans-serif', borderRadius: '4px', textDecoration: 'none' }}>Take Action Now</a>
+          <a href="#contact" style={{ background: '#4a7c3f', color: '#f5f0e8', padding: '14px 28px', fontSize: '14px', fontFamily: 'sans-serif', borderRadius: '4px', textDecoration: 'none' }}>Take Action Now</a>
           <a href="/facts" style={{ background: 'transparent', color: '#f5f0e8', border: '1px solid #c8b97a', padding: '14px 28px', fontSize: '14px', fontFamily: 'sans-serif', borderRadius: '4px', textDecoration: 'none' }}>Read the Facts</a>
           <a href="#contact" style={{ background: 'transparent', color: '#f5f0e8', border: '1px solid #c8b97a', padding: '14px 28px', fontSize: '14px', fontFamily: 'sans-serif', borderRadius: '4px', textDecoration: 'none' }}>Contact Officials</a>
         </div>
@@ -40,7 +40,7 @@ export default function Home() {
               { step: '03', title: 'Email the Planning Commission', body: 'The Planning Commission reviews all zoning changes before they reach the Board. Make sure they hear from you directly — their recommendation carries significant weight.', action: 'Email the Commission →', href: '#planning' },
               { step: '04', title: 'Attend Local Meetings', body: 'Show up in person. Public comment at Board of Supervisors and Planning Commission meetings is the most powerful statement you can make. See our upcoming events for dates.', action: 'See Upcoming Events →', href: '/events' },
               { step: '05', title: 'Request a Yard Sign', body: 'Put a sign in your yard and make your position visible to your neighbors and to anyone driving through. Signs create community — when neighbors see them, they know they are not alone.', action: 'Request a Sign →', href: '/request-sign' },
-              { step: '06', title: 'Sign Up for Updates', body: 'Stay informed. When votes are scheduled, when meetings are announced, when action is needed — you will be the first to know. Enter your email to join our mailing list.', action: 'Join the Mailing List →', href: '#newsletter' },
+              { step: '06', title: 'Sign Up for Updates', body: 'Stay informed. When votes are scheduled, when meetings are announced, when action is needed — you will be the first to know. Enter your email to join our mailing list.', action: 'Join the Mailing List →', href: '/contact' },
             ].map(item => (
               <div key={item.step} style={{ background: '#1a2e1a', border: '1px solid #3d5a3d', borderRadius: '6px', padding: '28px' }}>
                 <p style={{ fontSize: '32px', color: '#c8b97a', fontFamily: 'Georgia, serif', marginBottom: '12px', opacity: 0.6 }}>{item.step}</p>
