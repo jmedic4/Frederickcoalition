@@ -1,4 +1,5 @@
 'use client'
+export const dynamic = 'force-dynamic'
 import { useEffect, useState } from 'react'
 import { createClient } from '@supabase/supabase-js'
 import Nav from '../components/Nav'
@@ -60,9 +61,7 @@ export default function Blog() {
       <section style={{ background: '#1a2e1a', padding: '80px 40px', textAlign: 'center' }}>
         <p style={{ fontSize: '11px', letterSpacing: '3px', color: '#c8b97a', fontFamily: 'sans-serif', textTransform: 'uppercase', marginBottom: '12px' }}>Stay Informed</p>
         <h1 style={{ fontSize: '52px', color: '#f5f0e8', fontFamily: 'Georgia, serif', marginBottom: '16px' }}>Blog & Updates</h1>
-        <p style={{ fontSize: '18px', color: '#b8b09a', fontFamily: 'sans-serif', lineHeight: '1.6', maxWidth: '560px', margin: '0 auto' }}>
-          The latest news, action alerts, and updates from the Coalition to Protect Frederick County.
-        </p>
+        <p style={{ fontSize: '18px', color: '#b8b09a', fontFamily: 'sans-serif', lineHeight: '1.6', maxWidth: '560px', margin: '0 auto' }}>The latest news, action alerts, and updates from the Coalition to Protect Frederick County.</p>
       </section>
       <section style={{ padding: '80px 40px', background: '#f5f0e8' }}>
         <div style={{ maxWidth: '900px', margin: '0 auto' }}>
