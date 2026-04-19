@@ -33,7 +33,7 @@ export default function News() {
           <div style={{ background: '#1a2e1a', borderRadius: '6px', padding: '40px', textAlign: 'center', marginTop: '48px' }}>
             <h3 style={{ fontSize: '24px', color: '#f5f0e8', fontFamily: 'Georgia, serif', marginBottom: '12px' }}>Are You a Member of the Press?</h3>
             <p style={{ fontSize: '15px', color: '#b8b09a', fontFamily: 'sans-serif', marginBottom: '24px', maxWidth: '480px', margin: '0 auto 24px' }}>We welcome media inquiries. Contact us to speak with coalition leadership or our panel of experts.</p>
-            <a href="mailto:info@frederickcoalition.org" style={{ background: '#4a7c3f', color: '#f5f0e8', padding: '12px 24px', borderRadius: '4px', textDecoration: 'none', fontFamily: 'sans-serif', fontSize: '14px' }}>Contact the Coalition →</a>
+            <a href="/contact" style={{ background: '#4a7c3f', color: '#f5f0e8', padding: '12px 24px', borderRadius: '4px', textDecoration: 'none', fontFamily: 'sans-serif', fontSize: '14px' }}>Contact the Coalition →</a>
           </div>
         </div>
       </section>

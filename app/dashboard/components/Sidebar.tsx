@@ -11,6 +11,7 @@ const links = [
   { label: 'Chat', href: '/dashboard/chat', icon: '◉' },
   { label: 'Contacts', href: '/dashboard/contacts', icon: '◎' },
   { label: 'Saved URLs', href: '/dashboard/urls', icon: '⊕' },
+  { label: 'Messages', href: '/dashboard/messages', icon: '✉' },
 ]
 
 export default function Sidebar() {

@@ -12,6 +12,7 @@ export default function Nav() {
     { label: 'Blog', href: '/blog' },
     { label: 'Events', href: '/events' },
     { label: 'Request a Sign', href: '/request-sign' },
+    { label: 'Contact', href: '/contact' },
   ]
 
   return (

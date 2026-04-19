@@ -1,4 +1,5 @@
 import Nav from './components/Nav'
+import MailingListSignup from './components/MailingListSignup'
 import Footer from './components/Footer'
 import Image from 'next/image'
 
