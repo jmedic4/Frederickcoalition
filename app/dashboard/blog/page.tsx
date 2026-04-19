@@ -1,11 +1,6 @@
 'use client'
 import { useEffect, useState } from 'react'
-import { createClient } from '@supabase/supabase-js'
-
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-)
+import { supabase } from '../../../lib/supabase'
 
 type Post = {
   id: string
@@ -143,7 +138,6 @@ export default function BlogDashboard() {
               <p style={{ fontSize: '11px', color: '#aaa', fontFamily: 'sans-serif', marginTop: '4px' }}>frederickcoalition.org/blog/{form.slug || 'your-post-title'}</p>
             </div>
           </div>
-
           <div style={{ background: '#fff', border: '1px solid #ddd8cc', borderRadius: '8px', padding: '28px', marginBottom: '20px' }}>
             <p style={{ fontSize: '11px', letterSpacing: '3px', color: '#4a7c3f', fontFamily: 'sans-serif', textTransform: 'uppercase', marginBottom: '20px' }}>Cover Image</p>
             <input type="file" accept="image/*" onChange={handleImageUpload} style={{ width: '100%', padding: '10px 12px', border: '1.5px solid #ddd8cc', borderRadius: '6px', fontSize: '14px', fontFamily: 'sans-serif', boxSizing: 'border-box', marginBottom: '8px' }} />
@@ -155,32 +149,17 @@ export default function BlogDashboard() {
               </div>
             )}
           </div>
-
           <div style={{ background: '#fff', border: '1px solid #ddd8cc', borderRadius: '8px', padding: '28px', marginBottom: '20px' }}>
             <p style={{ fontSize: '11px', letterSpacing: '3px', color: '#4a7c3f', fontFamily: 'sans-serif', textTransform: 'uppercase', marginBottom: '20px' }}>Content</p>
-            <p style={{ fontSize: '12px', color: '#8a7a6a', fontFamily: 'sans-serif', marginBottom: '12px' }}>You can use line breaks to separate paragraphs. Links can be added as full URLs.</p>
-            <textarea
-              required
-              value={form.content}
-              onChange={e => setForm({...form, content: e.target.value})}
-              placeholder="Write your post content here...
-
-Start a new paragraph by pressing Enter twice.
-
-You can include links like https://example.com and they will be clickable."
-              rows={16}
-              style={{ width: '100%', padding: '12px', border: '1.5px solid #ddd8cc', borderRadius: '6px', fontSize: '15px', fontFamily: 'Georgia, serif', lineHeight: '1.7', resize: 'vertical', boxSizing: 'border-box' }}
-            />
+            <textarea required value={form.content} onChange={e => setForm({...form, content: e.target.value})} placeholder="Write your post content here..." rows={16} style={{ width: '100%', padding: '12px', border: '1.5px solid #ddd8cc', borderRadius: '6px', fontSize: '15px', fontFamily: 'Georgia, serif', lineHeight: '1.7', resize: 'vertical', boxSizing: 'border-box' }} />
           </div>
-
           <div style={{ background: '#fff', border: '1px solid #ddd8cc', borderRadius: '8px', padding: '24px', marginBottom: '24px', display: 'flex', alignItems: 'center', gap: '16px' }}>
             <input type="checkbox" id="published" checked={form.published} onChange={e => setForm({...form, published: e.target.checked})} style={{ width: '20px', height: '20px', accentColor: '#4a7c3f', cursor: 'pointer' }} />
             <div>
               <label htmlFor="published" style={{ fontSize: '15px', color: '#1a2e1a', fontFamily: 'sans-serif', fontWeight: 500, cursor: 'pointer' }}>Publish immediately</label>
-              <p style={{ fontSize: '12px', color: '#8a7a6a', fontFamily: 'sans-serif', margin: '2px 0 0' }}>Uncheck to save as draft — only visible to dashboard members</p>
+              <p style={{ fontSize: '12px', color: '#8a7a6a', fontFamily: 'sans-serif', margin: '2px 0 0' }}>Uncheck to save as draft</p>
             </div>
           </div>
-
           <div style={{ display: 'flex', gap: '12px' }}>
             <button type="submit" disabled={saving || uploading} style={{ background: '#4a7c3f', color: '#f5f0e8', border: 'none', padding: '12px 28px', borderRadius: '6px', fontSize: '15px', fontFamily: 'sans-serif', cursor: 'pointer', fontWeight: 500 }}>
               {saving ? 'Saving...' : editPost ? 'Save Changes' : 'Create Post'}
@@ -203,7 +182,6 @@ You can include links like https://example.com and they will be clickable."
         </div>
         <button onClick={openNew} style={{ background: '#4a7c3f', color: '#f5f0e8', border: 'none', padding: '10px 20px', borderRadius: '6px', fontSize: '14px', fontFamily: 'sans-serif', cursor: 'pointer', fontWeight: 500 }}>+ New Post</button>
       </div>
-
       {loading ? <p style={{ fontFamily: 'sans-serif', color: '#8a7a6a' }}>Loading...</p> : posts.length === 0 ? (
         <div style={{ background: '#fff', border: '1px solid #ddd8cc', borderRadius: '8px', padding: '48px', textAlign: 'center' }}>
           <p style={{ fontSize: '18px', color: '#1a2e1a', fontFamily: 'Georgia, serif', marginBottom: '8px' }}>No posts yet</p>
@@ -222,8 +200,7 @@ You can include links like https://example.com and they will be clickable."
                 <h3 style={{ fontSize: '18px', color: '#1a2e1a', fontFamily: 'Georgia, serif', marginBottom: '4px' }}>{post.title}</h3>
                 <p style={{ fontSize: '12px', color: '#8a7a6a', fontFamily: 'sans-serif' }}>
                   {post.author && `By ${post.author} · `}{new Date(post.created_at).toLocaleDateString()}
-                  {post.published && ` · `}
-                  {post.published && <a href={`/blog/${post.slug}`} target="_blank" rel="noopener noreferrer" style={{ color: '#4a7c3f', textDecoration: 'none' }}>View live →</a>}
+                  {post.published && <a href={`/blog/${post.slug}`} target="_blank" rel="noopener noreferrer" style={{ color: '#4a7c3f', textDecoration: 'none', marginLeft: '8px' }}>View live →</a>}
                 </p>
               </div>
               <div style={{ display: 'flex', gap: '8px', flexShrink: 0 }}>
